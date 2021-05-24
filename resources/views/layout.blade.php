@@ -17,7 +17,7 @@
 </head>
 <!--CONTENIDO DINAMICO-->
 <body>
-	<header class="space-inter">
+    <header class="space-inter">
 		<div class="container container-flex space-between">
 			<figure class="logo"><img src="/img/logo.png" alt=""></figure>
 			<nav class="custom-wrapper" id="menu">
