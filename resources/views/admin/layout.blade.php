@@ -13,13 +13,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="/adminlte/plugins/fontawesome-free/css/all.min.css">
-  
+
   @stack('styles')
   <!-- Theme style -->
   <link rel="stylesheet" href="/adminlte/css/adminlte.min.css">
   <link rel="stylesheet" href="/adminlte/css/bootstrap.min.css">
 </head>
-<body class="hold-transition sidebar-mini"> 
+<body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
   <!-- Navbar -->
@@ -213,7 +213,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         @endif
 
         @yield('content')
-      
+
     </div>
     <!-- /.content -->
   </div>
@@ -230,15 +230,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- /.control-sidebar -->
 
   <!-- Main Footer -->
-  <footer class="main-footer">
-    <!-- To the right -->
-    <div class="float-right d-none d-sm-inline">
-      Anything you want
-    </div>
-    <!-- Default to the left -->
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-  </footer>
+
+      <!--
+    <footer class="main-footer borde">
+
+        <div class="d-none d-sm-inline">
+             Anything you want
+        </div>
+
+        <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    </footer>
+-->
+
 </div>
+<style>
+    .borde{
+        border: solid 1px;
+    }
+</style>
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->

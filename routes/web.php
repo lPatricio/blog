@@ -29,6 +29,7 @@ Route::group([
             Route ::get('posts/{post}',[App\Http\Controllers\Admin\PostsController::class,'edit'])->name('admin.posts.edit')  ;
             Route ::put('posts/{post}',[App\Http\Controllers\Admin\PostsController::class,'update'])->name('admin.posts.update')  ;
             Route ::post('posts/{post}/photos',[App\Http\Controllers\Admin\PhotosController::class,'store'])->name('admin.posts.photos.store')  ;
+            Route::delete('photos/{photo}',[App\Http\Controllers\Admin\PhotosController::class,'destroy'])->name('admin.photos.destroy');
         });
 Route::get('summer',function(){
     return view('summer');
