@@ -62,6 +62,13 @@
                                 </textarea>
                                 {!!$errors->first('body','<span class="help-block">:message</span>')!!}
                             </div>
+                            <div class="form group {{$errors->has('iframe') ? 'alert-danger' : '' }}">
+                                <label for="">Contenido embebido (iframe)</label>
+                                <textarea name="iframe" id="editor" rows="2" class="form-control" placeholder="Ingrese el contenido embebido (iframe) de audio o video">
+                                    {{old('iframe',trim($post->iframe))}}
+                                </textarea>
+                                {!!$errors->first('iframe','<span class="help-block">:message</span>')!!}
+                            </div>
                     </div>
                 </div>
 
