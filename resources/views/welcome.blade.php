@@ -3,9 +3,12 @@
 	<div class="preload"></div>
 	<!--AQUI HEADER MENU LATERAL-->
 
-
 	<section class="posts container">
-		@foreach ($posts as $post)
+        @if (isset( $category))
+            <h3>Publicaciones de la categoria {{$category->name}}</h3>
+        @endif
+
+        @foreach ($posts as $post)
             @if ($post->photos->count()===1)
                 <figure><img src="{{$post->photos->first()->url }}" alt="" class="img-responsive"></figure>
             @elseif ($post->photos->count()>1 )
@@ -31,7 +34,11 @@
 							<span class="c-gray-1">{{$post->published_at->format('M d')}}</span>
 						</div>
 						<div class="post-category">
-							<span class="category text-capitalize">{{$post->category->name}}</span>
+							<span class="category text-capitalize">
+                                <a href="{{route('categories.show',$post->category)}}">
+                                    {{$post->category->name}}
+                                </a>
+                            </span>
 						</div>
 					</header>
 					<h1>{{$post->title}}</h1>
@@ -43,7 +50,11 @@
 						</div>
 						<div class="tags container-flex">
 							@foreach ($post->tags as $tag)
-								<span class="tag c-gray-1 text-capitalize">#{{$tag->name}}</span>
+								<span class="tag c-gray-1 text-capitalize">
+                                   <a href="{{route('tags.show',$tag)}}">
+                                        #{{$tag->name}}
+                                   </a>
+                                </span>
 							@endforeach
 
 
