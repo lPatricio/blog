@@ -9,10 +9,11 @@ class TagsController extends Controller
 {
     public function show(Tag $tag)
     {
-       // return $tag->posts;
+
+        return $tag->posts;
         return view('welcome',[
             'tag' =>$tag,
-            'posts' => $tag->posts()->paginate()
+            'posts' => $tag->posts()->paginate(1)
         ] );
     }
 }
