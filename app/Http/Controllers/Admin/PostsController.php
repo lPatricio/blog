@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\Tag;
+use App\Http\Requests\StorePostRequest;
 
 class PostsController extends Controller
 {
@@ -40,30 +41,33 @@ class PostsController extends Controller
         return view('admin.posts.edit',compact('categories','tags','post'));
 
     }
-    public function update(Post $post, Request $request){
+    public function update(Post $post, StorePostRequest $request){
 
+        $post->update($request->all());
+        $post->syncTags($request->get('tags'));
 
-        //validacion
-        $this->validate($request,[
+        return redirect()
+               ->route('admin.posts.edit',$post)
+               ->with('flash','La publicacion ha sido guardada.');
+    }
+
+    public function destroy(Post $post){
+        $post->tags()->detach();
+        $post->photos->each->delete();
+        $post->delete();
+        return redirect()
+               ->route('admin.posts.index')
+               ->with('flash','La publicacion ha sido eliminada.');
+    }
+
+  /*  public function validatePost($request)
+    {
+        return  $this->validate($request,[
             'title'=>'required',
             'body'=>'required',
             'category'=>'required',
             'excerpt'=>'required',
             'tags'=>'required'
             ]);
-
-        $post->title=$request->get('title');
-        //$post->url=str_slug($request->get('title'));
-        $post->body=$request->get('body');
-        $post->iframe=$request->get('iframe');
-        $post->excerpt=$request->get('excerpt');
-        $post->published_at=$request->filled('published_at') ? Carbon::parse($request->get('published_at')) : null;
-        $post->category_id=$request->get('category');
-
-        $post->save();
-
-        $post->tags()->sync($request->get('tags'));
-
-        return redirect()->route('admin.posts.edit',$post)->with('flash','Tu publicacion ha sido guardada.');
-    }
+    }*/
 }

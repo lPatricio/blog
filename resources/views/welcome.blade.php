@@ -10,12 +10,12 @@
 
         @foreach ($posts as $post)
             @if ($post->photos->count()===1)
-                <figure><img src="{{$post->photos->first()->url }}" alt="" class="img-responsive"></figure>
+                <figure><img src="{{url('storage/'.$post->photos->first()->url) }}" alt="" class="img-responsive"></figure>
             @elseif ($post->photos->count()>1 )
                 <div class="gallery-photos masonry">
                     @foreach ($post->photos->take(4) as $photo)
                         <figure class="gallery-image">
-                            <img src="{{url($photo->url)}}" alt="" width="100%">
+                            <img src="{{url('storage/'.$photo->url)}}" alt="" width="100%">
                             @if ($loop->iteration===4)
                                 <div class=" overlay">+ {{$post->photos->count()}} Fotos </div>
                             @endif

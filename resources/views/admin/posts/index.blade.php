@@ -43,10 +43,23 @@
                    class="btn btn-xs btn-info"
                    target="_blank"
                    >
+                   <i class="fas fa-eye"></i>
+                </a>
+                <a href="{{route('admin.posts.edit',$post)}}"
+                         class="btn btn-xs btn-info">
+                         <i class="fas fa-pen"></i>
+                </a>
+                <form method="POST"
+                      action="{{ route('admin.posts.destroy',$post) }}"
+                      style="display: inline">
+                      {{ csrf_field() }} {{method_field('DELETE')}}
+                    <button class="btn btn-xs btn-danger"n
+                            onclick="return confirm('¿Estas seguro de querer eliminar esta publicación?')"
+                        >
+                            <i class="fas fa-times"></i>
+                    </button>
+                </form>
 
-                   <i class="fas fa-eye"></i></a>
-                  <a href="{{route('admin.posts.edit',$post)}}" class="btn btn-xs btn-info"><i class="fas fa-pen"></i></a>
-                  <a href="#" class="btn btn-xs btn-danger"><i class="fas fa-times"></i></a>
               </td>
             </tr>
           @endforeach

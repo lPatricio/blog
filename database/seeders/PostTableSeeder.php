@@ -8,6 +8,7 @@ use App\Models\Post;
 use App\Models\Category;
 use App\Models\Tag;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class PostTableSeeder extends Seeder
 {
@@ -18,6 +19,7 @@ class PostTableSeeder extends Seeder
      */
     public function run()
     {
+        Storage::disk('public')->deleteDirectory('posts');
         Post::truncate();
         Category::truncate();
         Tag::truncate();
@@ -25,7 +27,7 @@ class PostTableSeeder extends Seeder
         $category=new Category;
         $category->name="Categoria 1";
         $category->save();
-        
+
         $category=new Category;
         $category->name="Categoria 2";
         $category->save();

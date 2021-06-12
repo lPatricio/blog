@@ -29,7 +29,7 @@
                                 <form method="POST" action="{{route('admin.photos.destroy',$photo->id)}}">
                                     @method('delete') {{csrf_field() }}
                                     <button class="btn btn-danger btn-xs" style="position: absolute;">X</button>
-                                    <img class="img-responsive" src="{{url($photo->url)}}" alt="">
+                                    <img class="img-responsive" src="{{url('storage/'.$photo->url)}}" alt="">
                                 </form>
                             </div>
                         @endforeach
@@ -90,21 +90,21 @@
                                     </div>
                                 </div>
                            </div>
-                            <div class="form-group {{$errors->has('category') ? 'alert-danger' : '' }}">
+                            <div class="form-group {{$errors->has('category_id') ? 'alert-danger' : '' }}">
                                 <label>Categorias</label>
-                                <select name="category" class="form-control">
+                                <select name="category_id" class="form-control select2">
                                     <option value="">Seleccione una categoria</option>
                                     @foreach($categories as $category)
                                     <option value="{{$category->id}}"
-                                        {{old('category',$post->category_id)==$category->id ? 'selected' : ''}}
+                                        {{old('category_id',$post->category_id)==$category->id ? 'selected' : ''}}
                                         >{{$category->name}}</option>
                                     @endforeach
                                 </select>
-                                {!!$errors->first('category','<span class="help-block">:message</span>')!!}
+                                {!!$errors->first('category_id','<span class="help-block">:message</span>')!!}
                             </div>
                         <div class="form-group {{$errors->has('tags') ? 'alert-danger' : '' }}">
                             <label for="">Etiquetas</label>
-                            <select name="tags[]" class="select2" multiple="multiple" data-placeholder="Selecciona una o mas etiquetas" style="width: 100%;" >
+                            <select name="tags[]" class="form-control select2" multiple="multiple" data-placeholder="Selecciona una o mas etiquetas" style="width: 100%;" >
                                 @foreach ($tags as $tag )
                                     <option {{collect(old('tags',$post->tags->pluck('id')))->contains($tag->id) ? 'selected' : '' }}
                                             value="{{$tag->id}}"
@@ -141,17 +141,6 @@
 
 <!-- </div>-->
 
-
-
-
-
-
-
-
-
-
-
-
 @stop
 
 @push('styles')
@@ -186,7 +175,10 @@
 
           });
 
-          $('.select2').select2();
+          $('.select2').select2({
+              tags:true
+          });
+
 
         var myDropzone=  new Dropzone('.dropzone',{
                 url:'/admin/posts/{{ $post->url }}/photos',
