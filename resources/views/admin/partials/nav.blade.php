@@ -5,7 +5,7 @@
            <a href="#"><i class="fa fa-link"></i><span>Multilevel</span>
                    <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
-                    </span> 
+                    </span>
            </a>
            <ul class="treeview-menu">
                 <li><a href="#">Link in level 2</a></li>
@@ -13,8 +13,8 @@
            </ul>
        </li>
   </ul>-->
-  
-  
+
+
   <!-- Sidebar Menu -->
    <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -27,12 +27,12 @@
               <p>
                 Navegación
                 <i class="right fas fa-angle-left"></i>
-                
+
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{Route('dashboard')}}" 
+                <a href="{{Route('dashboard')}}"
                    class="nav-link  {{request()->is('admin') ? 'active': '' }}"
                 >
                 <!--  <i class="far fa-circle nav-icon"></i>-->
@@ -47,10 +47,18 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" data-toggle="modal" data-target="#modal" class="nav-link ">
-                  <i class="fas fa-pencil-alt nav-icon"></i>
-                  <p>Crear un post</p>
-                </a>
+                  @if (request()->is('admin/posts/*'))
+                    <a href="{{route('admin.posts.index','#create')}}"  class="nav-link">
+                        <i class="fas fa-pencil-alt nav-icon"></i>
+                        <p>Crear un post</p>
+                    </a>
+                @else
+                    <a href="#" data-toggle="modal" data-target="#modal" class="nav-link ">
+                        <i class="fas fa-pencil-alt nav-icon"></i>
+                        <p>Crear un post</p>
+                    </a>
+                @endif
+
               </li>
             </ul>
           </li>
