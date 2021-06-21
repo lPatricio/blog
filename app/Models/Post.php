@@ -49,9 +49,35 @@ class Post extends Model
         ;
     }
 
-    public function setTitleAttribute($title){
+  /*  public function setTitleAttribute($title){
         $this->attributes['title']=$title;
-        $this->attributes['url']=str_slug($title);
+
+        $url=str_slug($title);
+        $duplicatedUrlCount=Post::where('url','LIKE',"{$url}%")->count();
+
+        if ( $duplicatedUrlCount) {
+            $url.="-".++$duplicatedUrlCount;
+        }
+        $this->attributes['url']=$url;
+    }*/
+
+    public static function create(array $attributes=[]){
+
+        $post=static::query()->create($attributes);
+        $post->generarUrl();
+        return $post;
+    }
+
+    public function generarUrl(){
+        $url=str_slug( $this->title);
+
+        if ($this->whereUrl($url)->exists() ) {
+            $url="{$url}-{$this->id}";
+
+        }
+        $this->url=$url;
+        $this->save();
+
     }
 
     public function setPublishedAtAttribute($published_at){
